@@ -1,33 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 
-const Car = () => {
-  const [car, setCar] = useState({
-    brand: "Ford",
-    model: "Mustang",
-    year: "1964",
-    color: "red",
-  });
+const Timer = () => {
+  const [count, setCount] = useState(0);
 
-  const updateColor = () => {
-    setCar((car) => {
-      return { ...car, color: "blue" };
-    });
-  };
-
-  return (
-    <>
-      <h1>My {car.brand}</h1>
-      <p>
-        It is a {car.color} {car.model} from {car.year}.
-      </p>
-      <button
-        type="button"
-        onClick={updateColor}
-      >Blue</button>
-    </>
+  useEffect(
+    () => {
+      setTimeout(
+        () => {
+          setCount((count) => count + 1);
+        }, 
+        1000
+      )
+    },
+    []
   );
+
+  return <h1>I've rendered {count} times!</h1>
 };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<Car />);
+root.render(<Timer />);
