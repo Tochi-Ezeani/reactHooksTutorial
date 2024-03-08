@@ -1,58 +1,27 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom/client";
 
-const UserContext = createContext();
+const App = () => {
+  const [inputValue, setInputValue] = useState("");
+  const count = useRef(0);
 
-const Component1 = () => {
-  const [user, setUser] = useState("Jesse Hall");
+  useEffect(
+    () => {
+      count.current += 1;
+    }
+  );
 
   return (
     <>
-      <UserContext.Provider value={user}>
-        <h1>Hello {user}!</h1>
-        <Component2 />
-      </UserContext.Provider>
-    </>
-  ) 
-};
-
-const Component2 = () => {
-  return (
-    <>
-      <h1>Component 2</h1>
-      <Component3 />
-    </>
-  )
-};
-
-const Component3 = () => {
-  return (
-    <>
-      <h1>Component 3</h1>
-      <Component4 />
-    </>
-  )
-};
-
-const Component4 = () => {
-  return (
-    <>
-      <h1>Component 4</h1>
-      <Component5 />
-    </>
-  )
-};
-
-const Component5 = () => {
-  const user = useContext(UserContext);
-  
-  return (
-    <>
-      <h1>Component 5</h1>
-      <h2>Hello {user} again!</h2>
+      <input 
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+      />
+      <h1>Render Count: {count.current}</h1>
     </>
   )
 };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<Component1 />)
+root.render(<App />)
