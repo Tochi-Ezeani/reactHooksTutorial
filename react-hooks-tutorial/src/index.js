@@ -1,24 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import ReactDOM from "react-dom/client";
 
 const App = () => {
-  const [inputValue, setInputValue] = useState("");
-  const count = useRef(0);
+  const inputElement = useRef();
 
-  useEffect(
-    () => {
-      count.current += 1;
-    }
-  );
+  const focusInput = () => {
+    inputElement.current.focus()
+  };
 
   return (
     <>
       <input 
         type="text"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
+        ref={inputElement}
       />
-      <h1>Render Count: {count.current}</h1>
+      <button onClick={focusInput}>Focus Input</button>
     </>
   )
 };
